@@ -42,13 +42,15 @@ public class Order extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.page_home:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+                        finish();
                         return true;
                     case R.id.page_order:
                         return true;
                     case R.id.page_add:
                         startActivity(new Intent(getApplicationContext(), Addmenu.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+                        finish();
                         return true;
                 }
                 return false;

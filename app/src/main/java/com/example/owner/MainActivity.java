@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // toolbar setting
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
@@ -44,11 +44,13 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.page_order:
                         startActivity(new Intent(getApplicationContext(), Order.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+                        finish();
                         return true;
                     case R.id.page_add:
                         startActivity(new Intent(getApplicationContext(), Addmenu.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+                        finish();
                         return true;
                 }
                 return false;
