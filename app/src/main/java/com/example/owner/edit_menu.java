@@ -72,6 +72,9 @@ public class edit_menu extends AppCompatActivity {
         list = (ListView) findViewById(R.id.main_list);
         list.setAdapter(menuAdapter);
 
+        Intent Add_menu = new Intent(getApplicationContext(), Addmenu.class);
+
+        //나중에 DB에서 불러올 때 수정할 곳.
         menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
         menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
         menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
@@ -80,10 +83,13 @@ public class edit_menu extends AppCompatActivity {
         menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
         menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
         menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-
+                startActivity(Add_menu);
+                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                finish();
             }
         });
     }
