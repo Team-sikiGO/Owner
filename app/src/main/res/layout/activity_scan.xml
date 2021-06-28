@@ -26,9 +26,48 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/scanner_view"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        android:text="Scan something..."
+        android:layout_margin="10dp"
+        android:textSize="20dp"
+        android:text="QR코드를 인식해서 주문을 접수하세요"
         android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/resultView"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/textView"
+        android:text=""
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/resultView"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:backgroundTint="@color/green"
+            android:id="@+id/accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="접수"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:backgroundTint="@color/red"
+            android:id="@+id/reject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="거절"
+            android:textColor="@color/black"
+            android:layout_marginLeft="15dp"/>
+
+
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

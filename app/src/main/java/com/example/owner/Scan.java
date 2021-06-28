@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.budiyev.android.codescanner.CodeScanner;
@@ -28,6 +29,7 @@ public class Scan extends AppCompatActivity {
     private Toolbar toolbar;
     private CodeScanner mCodeScanner;
     private CodeScannerView mCodeScannerView;
+    private TextView resultTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,8 @@ public class Scan extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        resultTV = (TextView) findViewById(R.id.resultView);
+                        resultTV.setText(result.getText());
                         Toast.makeText(Scan.this, result.getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
