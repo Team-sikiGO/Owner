@@ -15,13 +15,13 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Addmenu extends AppCompatActivity {
+public class Scan extends AppCompatActivity {
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addmenu);
+        setContentView(R.layout.activity_scan);
 
         // toolbar setting
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -32,7 +32,7 @@ public class Addmenu extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 
         //Set Home Selected
-        bottomNavigationView.setSelectedItemId(R.id.page_add);
+        bottomNavigationView.setSelectedItemId(R.id.page_scan);
 
         //Perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -49,12 +49,12 @@ public class Addmenu extends AppCompatActivity {
                         overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                         finish();
                         return true;
-                    case R.id.page_scan:
-                        startActivity(new Intent(getApplicationContext(), Scan.class));
+                    case R.id.page_add:
+                        startActivity(new Intent(getApplicationContext(), Addmenu.class));
                         overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                         finish();
                         return true;
-                    case R.id.page_add:
+                    case R.id.page_scan:
                         return true;
                 }
                 return false;

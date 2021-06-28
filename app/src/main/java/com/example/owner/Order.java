@@ -52,6 +52,11 @@ public class Order extends AppCompatActivity {
                         overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                         finish();
                         return true;
+                    case R.id.page_scan:
+                        startActivity(new Intent(getApplicationContext(), Scan.class));
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+                        finish();
+                        return true;
                 }
                 return false;
             }
