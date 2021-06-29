@@ -94,8 +94,8 @@ public class Scan extends AppCompatActivity {
                         Intent it = new Intent(getApplicationContext(), OrderList.class);
                         it.putExtra("orderList", result.getText());
 
-                        resultTV = (TextView) findViewById(R.id.resultView);
-                        resultTV.setText(result.getText());
+//                        resultTV = (TextView) findViewById(R.id.resultView);
+//                        resultTV.setText(result.getText());
 
                         startActivity(it);
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
