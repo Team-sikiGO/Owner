@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.owner">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!--인터넷 권한 선언-->
+    <uses-permission android:name="android.permission.CAMERA"/>  <!--카메라 권한 선언-->
 
     <application
         android:allowBackup="true"
@@ -26,7 +27,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Scan" />
         <activity android:name=".Addmenu" />
-        <activity android:name=".Order" />
+        <activity android:name=".OrderList"/>
+        <activity android:name=".Order"></activity>
     </application>
 
 </manifest>

@@ -9,13 +9,28 @@
 
     <include  layout="@layout/toolbar_main"/>
 
+    <com.budiyev.android.codescanner.CodeScannerView
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scanner_view"
+        app:autoFocusButtonColor="@android:color/white"
+        app:autoFocusButtonVisible="true"
+        app:flashButtonColor="@color/white"
+        app:flashButtonVisible="true"
+        app:maskColor="#63000000"/>
+
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan_QRCode"
-        android:textSize="50sp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="30dp"
+        android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_centerInParent="true"/>
+        android:text="QR코드를 인식해서 주문을 접수하세요"
+        android:layout_above="@id/bottom_nav"
+        android:textColor="@color/white"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
