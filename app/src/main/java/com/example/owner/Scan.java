@@ -11,7 +11,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,7 +31,7 @@ public class Scan extends AppCompatActivity {
     private Toolbar toolbar;
     private CodeScanner mCodeScanner;
     private CodeScannerView mCodeScannerView;
-    private TextView resultTV;
+    private TextView txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,22 +86,28 @@ public class Scan extends AppCompatActivity {
     private void startScanning() {
         mCodeScannerView = findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(this, mCodeScannerView);
-        mCodeScanner.startPreview(); // this linew is very important, as you will not be able to scan your code without this, you will only get black screen
+        mCodeScanner.startPreview(); // this line is very important, as you will not be able to scan your code without this, you will only get black screen
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull Result result) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Intent it = new Intent(getApplicationContext(), OrderList.class);
-                        it.putExtra("orderList", result.getText());
+                        String company = "SIKIGO";
+                        String rs = result.getText();
+                        String comp = rs.substring(0,6);
 
-//                        resultTV = (TextView) findViewById(R.id.resultView);
-//                        resultTV.setText(result.getText());
-
-                        startActivity(it);
-                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                        finish();
+                        if(comp.equals(company)) {
+                            Intent it = new Intent(getApplicationContext(), OrderList.class);
+                            it.putExtra("orderList", rs.substring(7));
+                            startActivity(it);
+                            overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                            finish();
+                        } else {
+                            txt = (TextView) findViewById(R.id.textView);
+                            txt.setText("올바른 QR코드가 아닙니다.");
+                            txt.setTextColor(Color.parseColor("#FF0000"));
+                        }
                     }
                 });
             }
@@ -109,6 +117,9 @@ public class Scan extends AppCompatActivity {
         mCodeScannerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                txt = (TextView) findViewById(R.id.textView);
+                txt.setText("QR코드를 인식해서 주문을 접수하세요");
+                txt.setTextColor(Color.parseColor("#FFFFFF"));
                 mCodeScanner.startPreview();
             }
         });
