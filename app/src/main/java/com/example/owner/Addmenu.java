@@ -4,19 +4,28 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Addmenu extends AppCompatActivity {
+    private static final int GET_GALLERY_IMAGE = 200;
     private Toolbar toolbar;
+    private ImageView ImageView_food;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +69,34 @@ public class Addmenu extends AppCompatActivity {
                 return false;
             }
         });
+        ImageView_food = (ImageView)findViewById(R.id.img1);
+
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.img1:
+                        Intent intent = new Intent(Intent.ACTION_PICK);
+                        intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                "image/*");
+                        startActivityForResult(intent, GET_GALLERY_IMAGE);
+                        break;
+                    case R.id.btn_UploadMenu:
+                        //DB에 데이터 등록
+                        break;
+                }
+            }
+        };
+        ImageView_food.setOnClickListener(clickListener);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri selectedImageUri = data.getData();
+            ImageView_food.setImageURI(selectedImageUri);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

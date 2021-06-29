@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".modifymenu">
+
+    <include  layout="@layout/toolbar_main"/>
+
+    <ImageView
+        android:id="@+id/mod_img1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@color/black"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerInParent="true"
+        />
+    <TextView
+        android:id="@+id/mod_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메뉴 이름"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/mod_img1"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/mod_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10,000₩"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/mod_tv1"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/mod_btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/mod_tv2"
+        android:layout_marginTop="20dp">
+
+    <Button
+        android:id="@+id/mod_btn_UploadMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:background="@color/black"
+        android:text="수정완료"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15sp"
+        app:backgroundTint="#000000"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/mod_tv2"
+        android:layout_centerInParent="true"/>
+
+    <Button
+        android:id="@+id/mod_btn_deleteMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@color/black"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="30dp"
+        android:text="삭제"
+        android:textSize="15sp"
+        app:backgroundTint="#000000"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/mod_tv2"
+        android:layout_centerInParent="true"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_nav"
+        app:itemBackground="@color/white"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        app:menu="@menu/bottom_navigation_menu"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

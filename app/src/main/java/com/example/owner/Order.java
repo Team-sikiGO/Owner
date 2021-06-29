@@ -11,13 +11,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.Toast;
 
 
+import com.android.volley.Response;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Order extends AppCompatActivity {
     private Toolbar toolbar;
+    String clickDate[] = new String[100];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +55,7 @@ public class Order extends AppCompatActivity {
                     case R.id.page_order:
                         return true;
                     case R.id.page_add:
-                        startActivity(new Intent(getApplicationContext(), Addmenu.class));
+                        startActivity(new Intent(getApplicationContext(), edit_menu.class));
                         overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                         finish();
                         return true;
@@ -61,6 +68,37 @@ public class Order extends AppCompatActivity {
                 return false;
             }
         });
+
+        final ListView list;
+        OrderAdapter dAdapter;
+        dAdapter = new OrderAdapter();
+        list = (ListView) findViewById(R.id.details_list);
+        list.setAdapter(dAdapter);
+
+        Intent detail = getIntent();
+        String userID = detail.getStringExtra("userID");
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int j = 0; j < jsonArray.length(); j++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(j);
+                        String resName = jsonObject.getString("resName");
+                        String date = jsonObject.getString("date");
+                        String menu = jsonObject.getString("menu");
+                        int price = jsonObject.getInt("price");
+                        clickDate[j] = date;
+
+                        dAdapter.addItem(resName, date);
+                        dAdapter.notifyDataSetChanged();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

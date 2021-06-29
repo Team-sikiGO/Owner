@@ -50,7 +50,7 @@ public class Scan extends AppCompatActivity {
                         finish();
                         return true;
                     case R.id.page_add:
-                        startActivity(new Intent(getApplicationContext(), Addmenu.class));
+                        startActivity(new Intent(getApplicationContext(), edit_menu.class));
                         overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                         finish();
                         return true;
