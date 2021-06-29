@@ -3,34 +3,30 @@ package com.example.owner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class edit_menu extends AppCompatActivity {
+public class modifymenu extends AppCompatActivity {
+    private static final int GET_GALLERY_IMAGE = 200;
+    private Toolbar toolbar;
+    private ImageView ImageView_food;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_menu);
-
+        setContentView(R.layout.activity_modifymenu);
         // toolbar setting
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
@@ -38,7 +34,7 @@ public class edit_menu extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 
         //Set Home Selected
-        bottomNavigationView.setSelectedItemId(R.id.page_home);
+        bottomNavigationView.setSelectedItemId(R.id.page_add);
 
         //Perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,46 +62,34 @@ public class edit_menu extends AppCompatActivity {
                 return false;
             }
         });
+        ImageView_food = (ImageView)findViewById(R.id.mod_img1);
 
-        final ListView list;
-        edit_menu_Adapter menuAdapter;
-        menuAdapter = new edit_menu_Adapter();
-        list = (ListView) findViewById(R.id.main_list);
-        list.setAdapter(menuAdapter);
-
-        Intent Add_menu = new Intent(getApplicationContext(), Addmenu.class);
-        Intent modify_menu = new Intent(getApplicationContext(), modifymenu.class);
-
-        Button Btn = (Button)findViewById(R.id.add_menu);
-        Btn.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(Add_menu);
-                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                finish();
+                switch (v.getId()) {
+                    case R.id.img1:
+                        Intent intent = new Intent(Intent.ACTION_PICK);
+                        intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                "image/*");
+                        startActivityForResult(intent, GET_GALLERY_IMAGE);
+                        break;
+                    case R.id.btn_UploadMenu:
+                        //DB에 데이터 등록
+                        break;
+                }
             }
-        });
+        };
+        ImageView_food.setOnClickListener(clickListener);
+    }
 
-
-
-        //나중에 DB에서 불러올 때 수정할 곳.
-        menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
-        menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
-        menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
-        menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
-        menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
-        menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
-        menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
-        menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                startActivity(modify_menu);
-                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                finish();
-            }
-        });
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri selectedImageUri = data.getData();
+            ImageView_food.setImageURI(selectedImageUri);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
