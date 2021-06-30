@@ -2,7 +2,7 @@ package com.example.owner;
 
 import android.graphics.drawable.Drawable;
 
-public class edit_menu_item {
+public class MenuItem {
     public String food_name;
     public String price;
     public Drawable food_image;

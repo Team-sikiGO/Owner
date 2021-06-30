@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class OrderAdapter extends BaseAdapter {
-    private ArrayList<Order_item> d_data = new ArrayList<Order_item>();
+    private ArrayList<OrderItem> d_data = new ArrayList<OrderItem>();
 
     public OrderAdapter() {
     }
@@ -33,7 +33,7 @@ public class OrderAdapter extends BaseAdapter {
         TextView titleTextView = (TextView) convertView.findViewById(R.id.detail_resName);
         TextView descTextView = (TextView) convertView.findViewById(R.id.detail_btn);
 
-        Order_item listViewItem = d_data.get(position);
+        OrderItem listViewItem = d_data.get(position);
 
         titleTextView.setText(d_data.get(position).details_resName);
         descTextView.setText(d_data.get(position).details_btn);
@@ -52,7 +52,7 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     public void addItem(String title, String desc) {
-        Order_item item = new Order_item();
+        OrderItem item = new OrderItem();
 
         item.setDetails_resName(title);
         item.setDetails_btn(desc);

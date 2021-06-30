@@ -1,10 +1,8 @@
 package com.example.owner;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,7 +53,7 @@ public class Order extends AppCompatActivity {
                     case R.id.page_order:
                         return true;
                     case R.id.page_add:
-                        startActivity(new Intent(getApplicationContext(), edit_menu.class));
+                        startActivity(new Intent(getApplicationContext(), MenuList.class));
                         overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                         finish();
                         return true;

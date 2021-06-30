@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Addmenu extends AppCompatActivity {
+public class AddMenu extends AppCompatActivity {
     private static final int GET_GALLERY_IMAGE = 200;
     private Toolbar toolbar;
     private ImageView ImageView_food;

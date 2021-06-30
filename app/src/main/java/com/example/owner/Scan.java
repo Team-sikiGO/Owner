@@ -1,19 +1,16 @@
 package com.example.owner;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -71,7 +68,7 @@ public class Scan extends AppCompatActivity {
                         finish();
                         return true;
                     case R.id.page_add:
-                        startActivity(new Intent(getApplicationContext(), edit_menu.class));
+                        startActivity(new Intent(getApplicationContext(), MenuList.class));
                         overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                         finish();
                         return true;
@@ -130,7 +127,6 @@ public class Scan extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == 123) {
             if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
                 startScanning();
             } else {
                 startScanning();
