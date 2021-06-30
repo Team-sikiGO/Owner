@@ -1,10 +1,8 @@
 package com.example.owner;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +13,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -55,7 +55,7 @@ public class Order extends AppCompatActivity {
                     case R.id.page_order:
                         return true;
                     case R.id.page_add:
-                        startActivity(new Intent(getApplicationContext(), edit_menu.class));
+                        startActivity(new Intent(getApplicationContext(), MenuList.class));
                         overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                         finish();
                         return true;
@@ -99,6 +99,10 @@ public class Order extends AppCompatActivity {
                 }
             }
         };
+
+        OrderDetail orderDetail = new OrderDetail(userID, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(Order.this);
+        queue.add(orderDetail);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

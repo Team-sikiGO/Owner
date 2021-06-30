@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class modifymenu extends AppCompatActivity {
+public class ModifyMenu extends AppCompatActivity {
     private static final int GET_GALLERY_IMAGE = 200;
     private Toolbar toolbar;
     private ImageView ImageView_food;
@@ -74,13 +74,24 @@ public class modifymenu extends AppCompatActivity {
                                 "image/*");
                         startActivityForResult(intent, GET_GALLERY_IMAGE);
                         break;
-                    case R.id.btn_UploadMenu:
-                        //DB에 데이터 등록
+                    case R.id.mod_btn_UploadMenu:
+                        //DB에 데이터 수정 후 등록
+                        break;
+                    case R.id.mod_btn_deleteMenu:
+                        //DB에 데이터 삭제
                         break;
                 }
             }
         };
         ImageView_food.setOnClickListener(clickListener);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ModifyMenu.this, MenuList.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+        finish();
     }
 
     @Override

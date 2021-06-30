@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,10 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class edit_menu extends AppCompatActivity {
+public class MenuList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +34,7 @@ public class edit_menu extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 
         //Set Home Selected
-        bottomNavigationView.setSelectedItemId(R.id.page_home);
+        bottomNavigationView.setSelectedItemId(R.id.page_add);
 
         //Perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -68,13 +64,13 @@ public class edit_menu extends AppCompatActivity {
         });
 
         final ListView list;
-        edit_menu_Adapter menuAdapter;
-        menuAdapter = new edit_menu_Adapter();
+        MenuAdapter menuAdapter;
+        menuAdapter = new MenuAdapter();
         list = (ListView) findViewById(R.id.main_list);
         list.setAdapter(menuAdapter);
 
         Intent Add_menu = new Intent(getApplicationContext(), Addmenu.class);
-        Intent modify_menu = new Intent(getApplicationContext(), modifymenu.class);
+        Intent modify_menu = new Intent(getApplicationContext(), ModifyMenu.class);
 
         Button Btn = (Button)findViewById(R.id.add_menu);
         Btn.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +81,6 @@ public class edit_menu extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
         //나중에 DB에서 불러올 때 수정할 곳.
         menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;

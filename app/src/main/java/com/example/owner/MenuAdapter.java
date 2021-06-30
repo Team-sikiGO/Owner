@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class edit_menu_Adapter extends BaseAdapter {
-    private ArrayList<edit_menu_item> food_Data = new ArrayList<edit_menu_item>();
+public class MenuAdapter extends BaseAdapter {
+    private ArrayList<MenuItem> food_Data = new ArrayList<MenuItem>();
 
-    public edit_menu_Adapter() {
+    public MenuAdapter() {
     }
 
     @Override
@@ -35,7 +35,7 @@ public class edit_menu_Adapter extends BaseAdapter {
         TextView nameTextView = (TextView) convertView.findViewById(R.id.textName);
         TextView priceTextView = (TextView) convertView.findViewById(R.id.textPrice);
 
-        edit_menu_item menu_item = food_Data.get(position);
+        MenuItem menu_item = food_Data.get(position);
 
         foodImageView.setImageDrawable(food_Data.get(position).food_image);
         nameTextView.setText(food_Data.get(position).food_name);
@@ -55,7 +55,7 @@ public class edit_menu_Adapter extends BaseAdapter {
     }
 
     public void addItem(Drawable image, String name, String price) {
-        edit_menu_item item = new edit_menu_item();
+        MenuItem item = new MenuItem();
 
         item.setFood_image(image);
         item.setFood_name(name);
