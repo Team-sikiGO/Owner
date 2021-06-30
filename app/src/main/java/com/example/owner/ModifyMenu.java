@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,7 +21,8 @@ public class ModifyMenu extends AppCompatActivity {
     private static final int GET_GALLERY_IMAGE = 200;
     private Toolbar toolbar;
     private ImageView ImageView_food;
-
+    private Button del_btn;
+    private Button mod_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,24 +65,28 @@ public class ModifyMenu extends AppCompatActivity {
             }
         });
         ImageView_food = (ImageView)findViewById(R.id.mod_img1);
+        mod_btn = (Button)findViewById(R.id.mod_btn_UploadMenu);
+        del_btn = (Button)findViewById(R.id.mod_btn_deleteMenu);
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
-                    case R.id.img1:
-                        Intent intent = new Intent(Intent.ACTION_PICK);
-                        intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                "image/*");
-                        startActivityForResult(intent, GET_GALLERY_IMAGE);
+                    case R.id.mod_img1:
+                        //이미지 선택
                         break;
-                    case R.id.btn_UploadMenu:
-                        //DB에 데이터 등록
+                    case R.id.mod_btn_UploadMenu:
+                        //DB에 데이터 수정
+                        break;
+                    case R.id.mod_btn_deleteMenu:
+                        //DB에 데이터 삭제
                         break;
                 }
             }
         };
         ImageView_food.setOnClickListener(clickListener);
+        mod_btn.setOnClickListener(clickListener);
+        del_btn.setOnClickListener(clickListener);
     }
 
     @Override

@@ -72,31 +72,6 @@ public class Order extends AppCompatActivity {
         dAdapter = new OrderAdapter();
         list = (ListView) findViewById(R.id.details_list);
         list.setAdapter(dAdapter);
-
-        Intent detail = getIntent();
-        String userID = detail.getStringExtra("userID");
-
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    for (int j = 0; j < jsonArray.length(); j++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(j);
-                        String resName = jsonObject.getString("resName");
-                        String date = jsonObject.getString("date");
-                        String menu = jsonObject.getString("menu");
-                        int price = jsonObject.getInt("price");
-                        clickDate[j] = date;
-
-                        dAdapter.addItem(resName, date);
-                        dAdapter.notifyDataSetChanged();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

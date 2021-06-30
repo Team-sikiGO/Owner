@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class AddMenu extends AppCompatActivity {
     private static final int GET_GALLERY_IMAGE = 200;
     private Toolbar toolbar;
     private ImageView ImageView_food;
+    private Button add_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,16 +72,14 @@ public class AddMenu extends AppCompatActivity {
             }
         });
         ImageView_food = (ImageView)findViewById(R.id.img1);
+        add_btn = (Button)findViewById(R.id.btn_UploadMenu);
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.img1:
-                        Intent intent = new Intent(Intent.ACTION_PICK);
-                        intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                "image/*");
-                        startActivityForResult(intent, GET_GALLERY_IMAGE);
+                        //이미지 선택
                         break;
                     case R.id.btn_UploadMenu:
                         //DB에 데이터 등록
@@ -87,7 +87,9 @@ public class AddMenu extends AppCompatActivity {
                 }
             }
         };
+
         ImageView_food.setOnClickListener(clickListener);
+        add_btn.setOnClickListener(clickListener);
     }
 
     @Override
