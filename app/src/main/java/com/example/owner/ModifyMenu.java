@@ -68,7 +68,7 @@ public class ModifyMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
-                    case R.id.img1:
+                    case R.id.menu_image:
                         Intent intent = new Intent(Intent.ACTION_PICK);
                         intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                                 "image/*");
