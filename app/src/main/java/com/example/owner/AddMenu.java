@@ -1,25 +1,46 @@
 package com.example.owner;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.loader.content.CursorLoader;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.w3c.dom.Text;
 
 public class AddMenu extends AppCompatActivity {
     private static final int GET_GALLERY_IMAGE = 200;
     private Toolbar toolbar;
-    private ImageView ImageView_food;
+    private ImageView foodImage;
+    private TextView imageViewText;
+    private EditText regMenu;
+    private EditText regPrice;
+    private Button uploadMenu;
+    private String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,29 +84,54 @@ public class AddMenu extends AppCompatActivity {
                 return false;
             }
         });
-        ImageView_food = (ImageView)findViewById(R.id.img1);
-
-
-        //Glide.with(this).load("http://whdvm1.dothome.co.kr/Android/uploads/20210629_0209491624931857120.png").into(this.ImageView_food);
-        //Picasso.get().load("http://whdvm1.dothome.co.kr/Android/uploads/20210629_0209491624931857120.png").into(ImageView_food);
+        foodImage = (ImageView)findViewById(R.id.menu_image);
+        imageViewText = (TextView)findViewById(R.id.myImageViewText);
+        uploadMenu = (Button)findViewById(R.id.btn_UploadMenu);
+        regMenu = (EditText)findViewById(R.id.register_menu);
+        regPrice = (EditText)findViewById(R.id.register_price);
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
-                    case R.id.img1:
+                    case R.id.menu_image:
+                        //메뉴 이미지 선택
                         Intent intent = new Intent(Intent.ACTION_PICK);
-                        intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                "image/*");
+                        intent.setType("image/*");
                         startActivityForResult(intent, GET_GALLERY_IMAGE);
                         break;
                     case R.id.btn_UploadMenu:
                         //DB에 데이터 등록
+                        String resName = "두첩분식";
+                        String menu = regMenu.getText().toString();
+                        String price = regPrice.getText().toString();
+                        String serverUrl = "http://whdvm1.dothome.co.kr/OWNER/uploadDB.php";
+
+                        SimpleMultiPartRequest smpr = new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(AddMenu.this, "전송 성공", Toast.LENGTH_SHORT).show();
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(AddMenu.this, "전송 실패", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        smpr.addStringParam("resName", resName);
+                        smpr.addStringParam("menu", menu);
+                        smpr.addStringParam("price", price);
+                        smpr.addFile("imagePath", imagePath);
+
+                        RequestQueue requestQueue = Volley.newRequestQueue(AddMenu.this);
+                        requestQueue.add(smpr);
+
                         break;
                 }
             }
         };
-        ImageView_food.setOnClickListener(clickListener);
+        foodImage.setOnClickListener(clickListener);
+        uploadMenu.setOnClickListener(clickListener);
     }
 
     @Override
@@ -99,10 +145,26 @@ public class AddMenu extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            ImageView_food.setImageURI(selectedImageUri);
+        if(requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            if(uri != null) {
+                foodImage.setImageURI(uri);
+                imagePath = getRealPathFromUri(uri);
+                imageViewText.setVisibility(View.INVISIBLE);
+            }
         }
+    }
+
+    //이미지의 URL을 절대경로로 바꿔주는 메소드
+    String getRealPathFromUri(Uri uri) {
+        String[] proj= {MediaStore.Images.Media.DATA};
+        CursorLoader loader= new CursorLoader(this, uri, proj, null, null, null);
+        Cursor cursor= loader.loadInBackground();
+        int column_index= cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result= cursor.getString(column_index);
+        cursor.close();
+        return  result;
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

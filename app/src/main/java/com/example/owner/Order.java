@@ -75,7 +75,7 @@ public class Order extends AppCompatActivity {
         list = (ListView) findViewById(R.id.details_list);
         list.setAdapter(dAdapter);
 
-        Intent detail = getIntent();
+       /* Intent detail = getIntent();
         String userID = detail.getStringExtra("userID");
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -102,7 +102,7 @@ public class Order extends AppCompatActivity {
 
         OrderDetail orderDetail = new OrderDetail(userID, responseListener);
         RequestQueue queue = Volley.newRequestQueue(Order.this);
-        queue.add(orderDetail);
+        queue.add(orderDetail);*/
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
