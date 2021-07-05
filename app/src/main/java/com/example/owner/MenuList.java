@@ -34,7 +34,7 @@ public class MenuList extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 
         //Set Home Selected
-        bottomNavigationView.setSelectedItemId(R.id.page_home);
+        bottomNavigationView.setSelectedItemId(R.id.page_add);
 
         //Perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -81,8 +81,6 @@ public class MenuList extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
         //나중에 DB에서 불러올 때 수정할 곳.
         menuAdapter.addItem(ContextCompat.getDrawable(this, R.drawable.cm27014203), "음식이름", "가격") ;

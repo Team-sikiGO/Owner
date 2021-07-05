@@ -13,7 +13,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -97,6 +99,10 @@ public class Order extends AppCompatActivity {
                 }
             }
         };
+
+        OrderDetail orderDetail = new OrderDetail(userID, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(Order.this);
+        queue.add(orderDetail);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

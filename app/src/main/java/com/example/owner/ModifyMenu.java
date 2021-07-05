@@ -74,13 +74,24 @@ public class ModifyMenu extends AppCompatActivity {
                                 "image/*");
                         startActivityForResult(intent, GET_GALLERY_IMAGE);
                         break;
-                    case R.id.btn_UploadMenu:
-                        //DB에 데이터 등록
+                    case R.id.mod_btn_UploadMenu:
+                        //DB에 데이터 수정 후 등록
+                        break;
+                    case R.id.mod_btn_deleteMenu:
+                        //DB에 데이터 삭제
                         break;
                 }
             }
         };
         ImageView_food.setOnClickListener(clickListener);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ModifyMenu.this, MenuList.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+        finish();
     }
 
     @Override

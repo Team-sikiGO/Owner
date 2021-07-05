@@ -9,6 +9,8 @@ import java.util.Map;
 
 public class OrderDetail extends StringRequest {
     final static private String URL = "http://whdvm1.dothome.co.kr/Orderdetail.php";
+    //
+    // final static private String URL = "http://whdvm1.dothome.co.kr/Image/shiba2.png";
     private Map<String, String> map;
 
     public OrderDetail(String userID, Response.Listener<String> listener) {

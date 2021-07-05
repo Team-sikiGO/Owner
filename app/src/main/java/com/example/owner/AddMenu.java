@@ -1,23 +1,17 @@
 package com.example.owner;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -71,6 +65,10 @@ public class AddMenu extends AppCompatActivity {
         });
         ImageView_food = (ImageView)findViewById(R.id.img1);
 
+
+        //Glide.with(this).load("http://whdvm1.dothome.co.kr/Android/uploads/20210629_0209491624931857120.png").into(this.ImageView_food);
+        //Picasso.get().load("http://whdvm1.dothome.co.kr/Android/uploads/20210629_0209491624931857120.png").into(ImageView_food);
+
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +86,14 @@ public class AddMenu extends AppCompatActivity {
             }
         };
         ImageView_food.setOnClickListener(clickListener);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Addmenu.this, MenuList.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+        finish();
     }
 
     @Override
