@@ -97,9 +97,6 @@ public class AddMenu extends AppCompatActivity {
                     case R.id.menu_image:
                         //메뉴 이미지 선택
                         Intent intent = new Intent(Intent.ACTION_PICK);
-                        /*intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                "image/*");
-                        startActivityForResult(intent, GET_GALLERY_IMAGE);*/
                         intent.setType("image/*");
                         startActivityForResult(intent, GET_GALLERY_IMAGE);
                         break;
@@ -148,18 +145,12 @@ public class AddMenu extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /*if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            ImageView_food.setImageURI(selectedImageUri);
-        }*/
         if(requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK) {
             Uri uri = data.getData();
             if(uri != null) {
                 foodImage.setImageURI(uri);
                 imagePath = getRealPathFromUri(uri);
                 imageViewText.setVisibility(View.INVISIBLE);
-
-                new AlertDialog.Builder(this).setMessage(uri.toString() + "\n" + imagePath).create().show();
             }
         }
     }
