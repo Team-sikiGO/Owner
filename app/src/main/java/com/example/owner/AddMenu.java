@@ -90,7 +90,7 @@ public class AddMenu extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Addmenu.this, MenuList.class);
+        Intent intent = new Intent(AddMenu.this, MenuList.class);
         startActivity(intent);
         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
         finish();
