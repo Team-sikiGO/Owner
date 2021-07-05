@@ -1,6 +1,6 @@
 package com.example.owner;
 
-public class Order_item {
+public class OrderItem {
     public String getDetails_resName() {
         return details_resName;
     }

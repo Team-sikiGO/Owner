@@ -69,7 +69,7 @@ public class MenuList extends AppCompatActivity {
         list = (ListView) findViewById(R.id.main_list);
         list.setAdapter(menuAdapter);
 
-        Intent Add_menu = new Intent(getApplicationContext(), Addmenu.class);
+        Intent Add_menu = new Intent(getApplicationContext(), AddMenu.class);
         Intent modify_menu = new Intent(getApplicationContext(), ModifyMenu.class);
 
         Button Btn = (Button)findViewById(R.id.add_menu);

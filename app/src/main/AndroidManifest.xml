@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".Scan" />
-        <activity android:name=".Addmenu" />
+        <activity android:name=".AddMenu" />
         <activity android:name=".OrderList"/>
         <activity android:name=".Order"></activity>
     </application>
