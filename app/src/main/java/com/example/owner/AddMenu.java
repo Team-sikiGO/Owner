@@ -16,14 +16,10 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.DecimalFormat;
-
 public class AddMenu extends AppCompatActivity {
     private static final int GET_GALLERY_IMAGE = 200;
     private Toolbar toolbar;
     private ImageView ImageView_food;
-    private DecimalFormat decimalFormat = new DecimalFormat("###,###");
-    private String result="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +81,6 @@ public class AddMenu extends AppCompatActivity {
                         break;
                     case R.id.btn_UploadMenu:
                         //DB에 데이터 등록
-                        
                         break;
                 }
             }
@@ -95,7 +90,7 @@ public class AddMenu extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(AddMenu.this, MenuList.class);
+        Intent intent = new Intent(Addmenu.this, MenuList.class);
         startActivity(intent);
         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
         finish();
