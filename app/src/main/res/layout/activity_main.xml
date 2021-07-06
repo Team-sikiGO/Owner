@@ -9,6 +9,80 @@
 
     <include  layout="@layout/toolbar_main"/>
 
+    <RelativeLayout
+        android:id="@+id/ViewMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_border">
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-5dp"
+            android:layout_toLeftOf="@id/week"
+            android:background="@drawable/btn_custom"
+            android:paddingRight="5dp"
+            android:text="일일"></TextView>
+
+        <TextView
+            android:id="@+id/week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-5dp"
+            android:layout_toLeftOf="@id/month"
+            android:background="@drawable/btn_custom"
+            android:paddingRight="5dp"
+            android:text="주간"></TextView>
+
+        <TextView
+            android:id="@+id/month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-5dp"
+            android:layout_toLeftOf="@id/year"
+            android:background="@drawable/btn_custom"
+            android:paddingRight="5dp"
+            android:text="월간"></TextView>
+
+        <TextView
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_custom"
+            android:text="연간"></TextView>
+
+        <TextView
+            android:id="@+id/money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/year"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:text="금액나오는 곳"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"></TextView>
+
+    </RelativeLayout>
+
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mcv_selectionColor="#3CDE97"
+        android:layout_below="@+id/ViewMoney"
+        android:layout_margin="5dp"
+        >
+    </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
